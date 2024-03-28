@@ -1,0 +1,10 @@
+[14-Feb-2024 18:08:53 UTC] PHP Warning:  Undefined array key "2x" in /var/www/therisingthoughts/wp-content/plugins/upload-max-file-size/Plugin_Card_Helper.php on line 244
+[14-Feb-2024 18:09:06 UTC] PHP Warning:  Undefined array key "2x" in /var/www/therisingthoughts/wp-content/plugins/upload-max-file-size/Plugin_Card_Helper.php on line 244
+[14-Feb-2024 18:13:10 UTC] PHP Warning:  Undefined property: WP_Ajax_Upgrader_Skin::$api in /var/www/therisingthoughts/wp-admin/includes/class-theme-upgrader.php on line 160
+[14-Feb-2024 18:15:56 UTC] PHP Warning:  Array to string conversion in /var/www/therisingthoughts/wp-includes/formatting.php on line 1108
+[14-Feb-2024 18:32:11 UTC] PHP Warning:  Array to string conversion in /var/www/therisingthoughts/wp-includes/formatting.php on line 1108
+[14-Feb-2024 18:41:24 UTC] PHP Warning:  Array to string conversion in /var/www/therisingthoughts/wp-includes/formatting.php on line 1108
+[16-Feb-2024 00:02:30 UTC] Javascript Message: syntax error (http://therisingthoughts.com/wp-content/themes/azure-news/assets/js/navigation.js?ver=1.0.1#78) - URL: http://therisingthoughts.com/ - Line: 78
+[18-Feb-2024 00:05:48 UTC] Javascript Message: syntax error (http://therisingthoughts.com/wp-content/themes/azure-news/assets/js/navigation.js?ver=1.0.1#78) - URL: http://therisingthoughts.com/ - Line: 78
+[19-Feb-2024 16:38:50 UTC] Javascript Message: syntax error (https://therisingthoughts.com/wp-content/themes/azure-news/assets/js/navigation.js?ver=1.0.1#78) - URL: https://therisingthoughts.com/ - Line: 78
+[22-Feb-2024 00:16:35 UTC] Javascript Message: syntax error (https://therisingthoughts.com/wp-content/themes/azure-news/assets/js/navigation.js?ver=1.0.1#78) - URL: https://therisingthoughts.com/ - Line: 78

@@ -1,0 +1,92 @@
+/*!
+Theme Name:   Azure Mag
+Theme URI:    https://codevibrant.com/wpthemes/azure-mag/
+Author:       CodeVibrant
+Author URI:   https://codevibrant.com
+Description:  Introducing Azure Mag, one of the best free WordPress magazine theme for your website. Inspired by Azure News, the theme includes easier and more user-friendly customization features so that you can transform your site like a breeze. Immerse your visitors in a world of elegance and functionality with Azure Mag's charming design and features. It inherits the robust feature of Azure News ensuring top-notch performance and reliability. From lightening fast page-loading speed to optimized SEO. The theme is equipped to handle the demands of a dynamic online magazine. Elevate your site's performance and user experience with Azure Mag. Also, You can check Demo here:https://demo.codevibrant.com/child-theme/azure-mag/
+Version:      1.0.1
+Tested up to: 6.4
+Requires PHP: 7.2
+License:      GNU General Public License v2 or later
+License URI:  https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html
+Template:     azure-news
+Text Domain:  azure-mag
+Tags:         blog, entertainment, news, one-column, two-columns, three-columns, four-columns, left-sidebar, right-sidebar, custom-background, custom-header, custom-logo, custom-menu, featured-images, footer-widgets, full-width-template, threaded-comments, translation-ready, rtl-language-support
+
+This theme, like WordPress, is licensed under the GPL.
+Use it to make something cool, have fun, and share what you've learned.
+*/
+
+.social-icons-wrapper {
+	margin: 0 auto;
+}
+
+#site-navigation ul li a {
+	padding: 10px 0;
+	margin: 0 20px;
+	font-weight: 600;
+	font-size: 18px;
+	line-height: 30px;
+}
+
+.social-icon a {
+	font-size: 20px;
+}
+
+.azure-news-banner-wrapper.has-banner-bg-color {
+	padding: 50px 0 40px;
+}
+
+.custom-button-wrap.azure-news-icon-elements {
+	display: none;
+}
+
+.main-header-wrapper {
+	padding: 10px 0 10px;
+}
+
+.dark-mode .azure-news-banner-wrapper.has-banner-bg-color {
+	background: #313131;
+}
+
+#colophon .site-info {
+	background: rgba(0,0,0,0.3);
+}
+
+#colophon .widget_archive a, .widget_categories a, 
+#colophon .widget_recent_entries a, 
+#colophon .widget_meta a, 
+#colophon .widget_recent_comments li, 
+#colophon .widget_rss li, 
+#colophon .widget_pages li a, 
+#colophon .widget_nav_menu li a, 
+#colophon .wp-block-latest-posts li a, 
+#colophon .wp-block-archives li a, 
+#colophon .wp-block-categories li a, 
+#colophon .wp-block-page-list li a, 
+#colophon .wp-block-latest-comments li{
+    color: #fff;
+}
+
+.footer-widget .widget_block {
+	margin: 0;
+}
+
+@media (max-width: 1300px) {
+.azure-news-site-layout--boxed #page {
+	width: 100% !important;
+}
+}
+
+@media (max-width: 768px) {
+.azure-news-site-layout--boxed .azure-news-container {
+	padding: 0 10px;
+}
+.site-branding a,
+.social-icons-wrapper li:last-child {
+margin: 0 !important;
+}
+.site-branding {
+	padding: 0 30px;
+}
+}

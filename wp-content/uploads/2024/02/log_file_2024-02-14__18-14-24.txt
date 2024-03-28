@@ -1,0 +1,49 @@
+
+---Downloaded files---
+The import files for: Azure Mag were successfully downloaded!
+Initial max execution time = 30
+Files info:
+Site URL = http://therisingthoughts.com
+Data file = /var/www/therisingthoughts/wp-content/uploads/2024/02/demo-content-import-file_2024-02-14__18-14-24.xml
+Widget file = /var/www/therisingthoughts/wp-content/uploads/2024/02/demo-widgets-import-file_2024-02-14__18-14-24.json
+Customizer file = /var/www/therisingthoughts/wp-content/uploads/2024/02/demo-customizer-import-file_2024-02-14__18-14-24.dat
+Redux files:
+not defined!
+
+---Importing widgets---
+Sidebar : 
+
+CV: Trending Posts - No Title - Imported
+Block - No Title - Imported
+Block - No Title - Imported
+
+Frontpage - Middle Right Sidebar : 
+
+CV: Latest Posts - No Title - Imported
+Block - No Title - Imported
+
+Header Sticky Sidebar : 
+
+CV: Trending Posts - No Title - Imported
+Block - No Title - Imported
+
+Footer Column 1 : 
+
+Block - No Title - Imported
+
+Footer Column 2 : 
+
+Block - No Title - Imported
+
+Footer Column 3 : 
+
+Block - No Title - Imported
+Navigation Menu - No Title - Imported
+
+
+
+---Importing customizer settings---
+Customizer settings import finished!
+
+---ocdi/after_import---
+

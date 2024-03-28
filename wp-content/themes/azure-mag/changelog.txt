@@ -1,0 +1,5 @@
+== 1.0.1: 2024-02-05 ==
+- New: Added function to support import demo data.
+
+== 1.0.0: 2024-01-25 ==
+- New: Submitted on trac.
