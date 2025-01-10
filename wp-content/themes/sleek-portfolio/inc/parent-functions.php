@@ -118,7 +118,7 @@ function perfect_portfolio_footer_bottom(){ ?>
                 } 
                 perfect_portfolio_get_footer_copyright();
                 esc_html_e( '', 'sleek-portfolio' );
-                echo '<a href="' . esc_url( 'https://sujanneupane.com.np/' ) .'" rel="nofollow" target="_blank">' . esc_html__( '', 'sleek-portfolio' ) . '</a>.';
+                echo '<a href="' . esc_url( 'https://sujanneupane.com.np/' ) .'" rel="nofollow" target="_blank">' . esc_html__( '', 'sleek-portfolio' ) . '</a>';
                 
             ?>               
             </div>
