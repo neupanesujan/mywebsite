@@ -117,10 +117,9 @@ function perfect_portfolio_footer_bottom(){ ?>
                     the_privacy_policy_link( '', '<span role="separator" aria-hidden="true"></span>' );
                 } 
                 perfect_portfolio_get_footer_copyright();
-                esc_html_e( 'Sleek Portfolio | Developed By ', 'sleek-portfolio' );
-                echo '<a href="' . esc_url( 'https://rarathemes.com/' ) .'" rel="nofollow" target="_blank">' . esc_html__( 'Rara Themes', 'sleek-portfolio' ) . '</a>.';
+                esc_html_e( '', 'sleek-portfolio' );
+                echo '<a href="' . esc_url( 'https://sujanneupane.com.np/' ) .'" rel="nofollow" target="_blank">' . esc_html__( '', 'sleek-portfolio' ) . '</a>.';
                 
-                printf( esc_html__( ' Powered by %s', 'sleek-portfolio' ), '<a href="'. esc_url( __( 'https://wordpress.org/', 'sleek-portfolio' ) ) .'" target="_blank">WordPress</a>.' );
             ?>               
             </div>
             <div class="foot-social">
