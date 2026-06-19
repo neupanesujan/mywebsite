@@ -19,6 +19,20 @@ get_header();
 		</div>
 	</section>
 
+	<section id="about" class="about-section" style="max-width: 1200px; margin: 100px auto; padding: 0 20px; display: flex; flex-wrap: wrap; gap: 40px; align-items: center;">
+		<div class="about-image" style="flex: 1; min-width: 300px; text-align: center;">
+			<img src="<?php echo esc_url( home_url( '/wp-content/uploads/2024/03/sujanneupane_logo.png' ) ); ?>" alt="Sujan Neupane" style="width: 100%; max-width: 350px; border-radius: 20px; box-shadow: var(--shadow-neon);">
+		</div>
+		<div class="about-content" style="flex: 2; min-width: 300px;">
+			<h2 style="font-size: 2.5rem; margin-bottom: 20px;">About <span style="color: var(--accent-green);">Me</span></h2>
+			<p style="font-size: 1.1rem; color: var(--text-secondary); margin-bottom: 20px;">
+				Hello, I am Sujan Neupane. I am deeply interested in the Energy sector, Industrial Engineering, and Optimization. 
+				My research focuses on smart grids, sustainable manufacturing, and developing predictive models for complex industrial systems.
+			</p>
+			<a href="#research" class="btn-primary">View My Research</a>
+		</div>
+	</section>
+
 	<section id="research" class="research-grid">
 		
 		<?php

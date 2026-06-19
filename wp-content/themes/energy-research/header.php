@@ -14,7 +14,7 @@
 	<div class="header-container">
 		<div class="site-branding">
 			<a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home">
-				Energy<span>Research</span>
+				Sujan<span>Neupane</span>
 			</a>
 		</div>
 
