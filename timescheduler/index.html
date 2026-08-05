@@ -4,9 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Projech H - Time Scheduler</title>
+    <title>Project H - Time Scheduler</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lucide/0.263.1/umd/lucide.min.js"></script>
 
     <script>
@@ -15,18 +16,23 @@
                 extend: {
                     fontFamily: {
                         sans: ['Inter', 'sans-serif'],
+                        fraunces: ['Fraunces', 'serif'],
+                        mono: ['IBM Plex Mono', 'monospace'],
                     },
                     colors: {
-                        sydney: '#3b82f6', // blue-500
-                        la: '#f59e0b',     // amber-500
-                        nepal: '#10b981',  // emerald-500
-                        darkBg: '#0b1120',
-                        cardBg: '#1e293b'
+                        sydney: '#1F5A4C', // canopy
+                        la: '#D9A441',     // marigold
+                        nepal: '#3A5B8C',  // doctor
+                        ink: '#16241F',
+                        paper: '#F6F4EE',
+                        cardBg: '#FFFFFF',
+                        mist: '#DDE3DD',
+                        muted: '#5B6B62'
                     },
                     boxShadow: {
-                        'glow-syd': '0 0 20px rgba(59, 130, 246, 0.15)',
-                        'glow-la': '0 0 20px rgba(245, 158, 11, 0.15)',
-                        'glow-nepal': '0 0 20px rgba(16, 185, 129, 0.15)',
+                        'glow-syd': '0 1px 2px rgba(22,36,31,.06), 0 8px 24px -12px rgba(22,36,31,.18)',
+                        'glow-la': '0 1px 2px rgba(22,36,31,.06), 0 8px 24px -12px rgba(22,36,31,.18)',
+                        'glow-nepal': '0 1px 2px rgba(22,36,31,.06), 0 8px 24px -12px rgba(22,36,31,.18)',
                     }
                 }
             }
@@ -34,12 +40,8 @@
     </script>
     <style>
         body {
-            background-color: #0b1120;
-            background-image:
-                radial-gradient(at 0% 0%, rgba(59, 130, 246, 0.1) 0px, transparent 50%),
-                radial-gradient(at 100% 0%, rgba(16, 185, 129, 0.1) 0px, transparent 50%);
-            background-attachment: fixed;
-            color: #e2e8f0;
+            background-color: #F6F4EE;
+            color: #16241F;
             font-family: 'Inter', sans-serif;
             -webkit-font-smoothing: antialiased;
         }
@@ -63,11 +65,11 @@
             height: 28px;
             width: 28px;
             border-radius: 50%;
-            background: #ffffff;
+            background: #1F5A4C;
             cursor: pointer;
             margin-top: -10px;
-            box-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
-            border: 3px solid #3b82f6;
+            border: 3px solid #E6EEEA;
+            box-shadow: 0 1px 2px rgba(22,36,31,.06), 0 8px 24px -12px rgba(22,36,31,.18);
             transition: transform 0.1s;
         }
 
@@ -79,21 +81,21 @@
             width: 100%;
             height: 8px;
             cursor: pointer;
-            background: linear-gradient(90deg, #1e293b 0%, #334155 50%, #1e293b 100%);
+            background: #DDE3DD;
             border-radius: 4px;
-            border: 1px solid rgba(255, 255, 255, 0.05);
+            border: 1px solid #C7D0C6;
         }
 
         .glass-card {
-            background: rgba(30, 41, 59, 0.4);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.05);
+            background: #FFFFFF;
+            border: 1px solid #DDE3DD;
+            border-radius: 14px;
+            box-shadow: 0 1px 2px rgba(22,36,31,.06), 0 8px 24px -12px rgba(22,36,31,.18);
             transition: transform 0.2s, box-shadow 0.2s;
         }
 
         .glass-card:hover {
-            background: rgba(30, 41, 59, 0.6);
+            background: #FBFBFB;
         }
 
         .status-badge {
@@ -112,46 +114,46 @@
 
         <!-- Header -->
         <div class="text-center space-y-3 mb-10">
-            <h1 class="text-4xl md:text-5xl font-bold text-white tracking-tight"> <span
-                    class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-emerald-400">Project H</span>
+            <h1 class="text-4xl md:text-5xl font-fraunces font-medium text-ink tracking-tight"> <span
+                    class="text-sydney italic">Project H</span>
                 - Time Scheduler</h1>
-            <p class="text-slate-400 text-lg max-w-2xl mx-auto">Finding the perfect overlap for Sydney, Los Angeles, and
+            <p class="text-muted text-lg max-w-2xl mx-auto">Finding the perfect overlap for Sydney, Los Angeles, and
                 Nepal.</p>
         </div>
 
         <!-- Presets -->
         <div class="flex flex-wrap gap-4 justify-center mb-8 relative z-50">
             <button id="preset-1"
-                class="glass-card hover:-translate-y-1 hover:shadow-glow-syd transition px-6 py-4 rounded-xl flex items-center gap-4 border-l-4 border-l-blue-500 group">
+                class="glass-card hover:-translate-y-1 hover:shadow-glow-syd transition px-6 py-4 rounded-xl flex items-center gap-4 border-l-4 border-l-sydney group">
                 <div
-                    class="p-2 rounded-lg bg-blue-500/20 text-blue-400 group-hover:bg-blue-500 group-hover:text-white transition">
+                    class="p-2 rounded-lg bg-[#E6EEEA] text-sydney group-hover:bg-sydney group-hover:text-white transition">
                     <i data-lucide="calendar-check" class="w-5 h-5"></i>
                 </div>
                 <div class="text-left">
-                    <div class="font-semibold text-white">Option 1: Friday Overlap</div>
-                    <div class="text-xs text-slate-400 mt-1">Sydney: 2:00 PM (Fri)</div>
+                    <div class="font-semibold text-ink">Option 1: Friday Overlap</div>
+                    <div class="text-xs text-muted mt-1 font-mono">Sydney: 2:00 PM (Fri)</div>
                 </div>
             </button>
             <button id="preset-2"
-                class="glass-card hover:-translate-y-1 hover:shadow-glow-syd transition px-6 py-4 rounded-xl flex items-center gap-4 border-l-4 border-l-blue-500 group">
+                class="glass-card hover:-translate-y-1 hover:shadow-glow-syd transition px-6 py-4 rounded-xl flex items-center gap-4 border-l-4 border-l-sydney group">
                 <div
-                    class="p-2 rounded-lg bg-blue-500/20 text-blue-400 group-hover:bg-blue-500 group-hover:text-white transition">
+                    class="p-2 rounded-lg bg-[#E6EEEA] text-sydney group-hover:bg-sydney group-hover:text-white transition">
                     <i data-lucide="calendar-check" class="w-5 h-5"></i>
                 </div>
                 <div class="text-left">
-                    <div class="font-semibold text-white">Option 2: Saturday Overlap</div>
-                    <div class="text-xs text-slate-400 mt-1">Sydney: 2:00 PM (Sat)</div>
+                    <div class="font-semibold text-ink">Option 2: Saturday Overlap</div>
+                    <div class="text-xs text-muted mt-1 font-mono">Sydney: 2:00 PM (Sat)</div>
                 </div>
             </button>
             <button id="preset-3"
-                class="glass-card hover:-translate-y-1 hover:shadow-glow-syd transition px-6 py-4 rounded-xl flex items-center gap-4 border-l-4 border-l-blue-500 group">
+                class="glass-card hover:-translate-y-1 hover:shadow-glow-syd transition px-6 py-4 rounded-xl flex items-center gap-4 border-l-4 border-l-sydney group">
                 <div
-                    class="p-2 rounded-lg bg-blue-500/20 text-blue-400 group-hover:bg-blue-500 group-hover:text-white transition">
+                    class="p-2 rounded-lg bg-[#E6EEEA] text-sydney group-hover:bg-sydney group-hover:text-white transition">
                     <i data-lucide="calendar-check" class="w-5 h-5"></i>
                 </div>
                 <div class="text-left">
-                    <div class="font-semibold text-white">Option 3: Monday Evening</div>
-                    <div class="text-xs text-slate-400 mt-1">Sydney: 6:00 PM (Mon)</div>
+                    <div class="font-semibold text-ink">Option 3: Monday Evening</div>
+                    <div class="text-xs text-muted mt-1 font-mono">Sydney: 6:00 PM (Mon)</div>
                 </div>
             </button>
         </div>
@@ -159,7 +161,7 @@
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
 
             <!-- Sydney Card (Sujan) -->
-            <div class="glass-card rounded-2xl p-6 relative overflow-hidden group hover:shadow-glow-syd">
+            <div class="glass-card rounded-2xl p-6 relative overflow-hidden group hover:shadow-glow-syd border border-mist">
                 <div
                     class="absolute -right-6 -top-6 opacity-[0.03] group-hover:opacity-[0.08] transition duration-500 pointer-events-none">
                     <i data-lucide="compass" class="w-48 h-48 text-sydney"></i>
@@ -168,29 +170,29 @@
                     <div>
                         <div class="flex items-center gap-2 mb-1">
                             <span class="text-2xl">🇦🇺</span>
-                            <h2 class="text-xl font-bold text-white tracking-tight">Sydney</h2>
+                            <h2 class="text-xl font-fraunces font-medium text-ink tracking-tight">Sydney</h2>
                         </div>
                         <div class="flex items-center gap-2">
-                            <span class="text-xs font-medium bg-sydney/20 text-sydney px-2 py-0.5 rounded">AEST</span>
-                            <p class="text-sm text-slate-400">Sujan</p>
+                            <span class="text-xs font-mono font-medium bg-[#E6EEEA] text-sydney px-2 py-0.5 rounded-full">AEST</span>
+                            <p class="text-sm text-muted">Sujan</p>
                         </div>
                     </div>
                 </div>
                 <div class="relative z-10 flex flex-col items-center text-center">
-                    <div id="syd-sujan-time" class="text-5xl font-bold text-white time-transition tracking-tighter mb-2">14:00
+                    <div id="syd-sujan-time" class="text-5xl font-fraunces font-medium text-ink time-transition tracking-tighter mb-2">14:00
                     </div>
-                    <div id="syd-sujan-day" class="text-slate-300 font-medium text-lg">Friday</div>
-                    <div class="mt-6 w-full h-[1px] bg-gradient-to-r from-transparent via-slate-700 to-transparent">
+                    <div id="syd-sujan-day" class="text-ink font-medium text-lg">Friday</div>
+                    <div class="mt-6 w-full h-[1px] bg-mist">
                     </div>
                     <div id="syd-sujan-status"
-                        class="status-badge mt-4 w-full text-sm px-4 py-3 rounded-xl bg-slate-800 text-slate-300 flex items-center justify-center gap-2">
+                        class="status-badge mt-4 w-full text-sm px-4 py-3 rounded-xl bg-paper text-ink flex items-center justify-center gap-2 border border-mist">
                         <i data-lucide="loader" class="w-4 h-4 animate-spin"></i> Calculating...
                     </div>
                 </div>
             </div>
 
             <!-- Sydney Card (Bishnu) -->
-            <div class="glass-card rounded-2xl p-6 relative overflow-hidden group hover:shadow-glow-syd">
+            <div class="glass-card rounded-2xl p-6 relative overflow-hidden group hover:shadow-glow-syd border border-mist">
                 <div
                     class="absolute -right-6 -top-6 opacity-[0.03] group-hover:opacity-[0.08] transition duration-500 pointer-events-none">
                     <i data-lucide="compass" class="w-48 h-48 text-sydney"></i>
@@ -199,29 +201,29 @@
                     <div>
                         <div class="flex items-center gap-2 mb-1">
                             <span class="text-2xl">🇦🇺</span>
-                            <h2 class="text-xl font-bold text-white tracking-tight">Sydney</h2>
+                            <h2 class="text-xl font-fraunces font-medium text-ink tracking-tight">Sydney</h2>
                         </div>
                         <div class="flex items-center gap-2">
-                            <span class="text-xs font-medium bg-sydney/20 text-sydney px-2 py-0.5 rounded">AEST</span>
-                            <p class="text-sm text-slate-400">Bishnu</p>
+                            <span class="text-xs font-mono font-medium bg-[#E6EEEA] text-sydney px-2 py-0.5 rounded-full">AEST</span>
+                            <p class="text-sm text-muted">Bishnu</p>
                         </div>
                     </div>
                 </div>
                 <div class="relative z-10 flex flex-col items-center text-center">
-                    <div id="syd-bishnu-time" class="text-5xl font-bold text-white time-transition tracking-tighter mb-2">14:00
+                    <div id="syd-bishnu-time" class="text-5xl font-fraunces font-medium text-ink time-transition tracking-tighter mb-2">14:00
                     </div>
-                    <div id="syd-bishnu-day" class="text-slate-300 font-medium text-lg">Friday</div>
-                    <div class="mt-6 w-full h-[1px] bg-gradient-to-r from-transparent via-slate-700 to-transparent">
+                    <div id="syd-bishnu-day" class="text-ink font-medium text-lg">Friday</div>
+                    <div class="mt-6 w-full h-[1px] bg-mist">
                     </div>
                     <div id="syd-bishnu-status"
-                        class="status-badge mt-4 w-full text-sm px-4 py-3 rounded-xl bg-slate-800 text-slate-300 flex items-center justify-center gap-2">
+                        class="status-badge mt-4 w-full text-sm px-4 py-3 rounded-xl bg-paper text-ink flex items-center justify-center gap-2 border border-mist">
                         <i data-lucide="loader" class="w-4 h-4 animate-spin"></i> Calculating...
                     </div>
                 </div>
             </div>
 
             <!-- LA Card -->
-            <div class="glass-card rounded-2xl p-6 relative overflow-hidden group hover:shadow-glow-la">
+            <div class="glass-card rounded-2xl p-6 relative overflow-hidden group hover:shadow-glow-la border border-mist">
                 <div
                     class="absolute -right-6 -top-6 opacity-[0.03] group-hover:opacity-[0.08] transition duration-500 pointer-events-none">
                     <i data-lucide="palm-tree" class="w-48 h-48 text-la"></i>
@@ -230,29 +232,29 @@
                     <div>
                         <div class="flex items-center gap-2 mb-1">
                             <span class="text-2xl">🇺🇸</span>
-                            <h2 class="text-xl font-bold text-white tracking-tight">Los Angeles</h2>
+                            <h2 class="text-xl font-fraunces font-medium text-ink tracking-tight">Los Angeles</h2>
                         </div>
                         <div class="flex items-center gap-2">
-                            <span class="text-xs font-medium bg-la/20 text-la px-2 py-0.5 rounded">PDT</span>
-                            <p class="text-sm text-slate-400">Biplov</p>
+                            <span class="text-xs font-mono font-medium bg-[#FBEFD9] text-la px-2 py-0.5 rounded-full">PDT</span>
+                            <p class="text-sm text-muted">Biplov</p>
                         </div>
                     </div>
                 </div>
                 <div class="relative z-10 flex flex-col items-center text-center">
-                    <div id="la-time" class="text-5xl font-bold text-white time-transition tracking-tighter mb-2">21:00
+                    <div id="la-time" class="text-5xl font-fraunces font-medium text-ink time-transition tracking-tighter mb-2">21:00
                     </div>
-                    <div id="la-day" class="text-slate-300 font-medium text-lg">Thursday</div>
-                    <div class="mt-6 w-full h-[1px] bg-gradient-to-r from-transparent via-slate-700 to-transparent">
+                    <div id="la-day" class="text-ink font-medium text-lg">Thursday</div>
+                    <div class="mt-6 w-full h-[1px] bg-mist">
                     </div>
                     <div id="la-status"
-                        class="status-badge mt-4 w-full text-sm px-4 py-3 rounded-xl bg-slate-800 text-slate-300 flex items-center justify-center gap-2">
+                        class="status-badge mt-4 w-full text-sm px-4 py-3 rounded-xl bg-paper text-ink flex items-center justify-center gap-2 border border-mist">
                         <i data-lucide="loader" class="w-4 h-4 animate-spin"></i> Calculating...
                     </div>
                 </div>
             </div>
 
             <!-- Nepal Card -->
-            <div class="glass-card rounded-2xl p-6 relative overflow-hidden group hover:shadow-glow-nepal">
+            <div class="glass-card rounded-2xl p-6 relative overflow-hidden group hover:shadow-glow-nepal border border-mist">
                 <div
                     class="absolute -right-6 -top-6 opacity-[0.03] group-hover:opacity-[0.08] transition duration-500 pointer-events-none">
                     <i data-lucide="mountain-snow" class="w-48 h-48 text-nepal"></i>
@@ -261,22 +263,22 @@
                     <div>
                         <div class="flex items-center gap-2 mb-1">
                             <span class="text-2xl">🇳🇵</span>
-                            <h2 class="text-xl font-bold text-white tracking-tight">Nepal</h2>
+                            <h2 class="text-xl font-fraunces font-medium text-ink tracking-tight">Nepal</h2>
                         </div>
                         <div class="flex items-center gap-2">
-                            <span class="text-xs font-medium bg-nepal/20 text-nepal px-2 py-0.5 rounded">NPT</span>
-                            <p class="text-sm text-slate-400">Roshna</p>
+                            <span class="text-xs font-mono font-medium bg-[#E7ECF5] text-nepal px-2 py-0.5 rounded-full">NPT</span>
+                            <p class="text-sm text-muted">Roshna</p>
                         </div>
                     </div>
                 </div>
                 <div class="relative z-10 flex flex-col items-center text-center">
-                    <div id="nepal-time" class="text-5xl font-bold text-white time-transition tracking-tighter mb-2">
+                    <div id="nepal-time" class="text-5xl font-fraunces font-medium text-ink time-transition tracking-tighter mb-2">
                         09:45</div>
-                    <div id="nepal-day" class="text-slate-300 font-medium text-lg">Friday</div>
-                    <div class="mt-6 w-full h-[1px] bg-gradient-to-r from-transparent via-slate-700 to-transparent">
+                    <div id="nepal-day" class="text-ink font-medium text-lg">Friday</div>
+                    <div class="mt-6 w-full h-[1px] bg-mist">
                     </div>
                     <div id="nepal-status"
-                        class="status-badge mt-4 w-full text-sm px-4 py-3 rounded-xl bg-slate-800 text-slate-300 flex items-center justify-center gap-2">
+                        class="status-badge mt-4 w-full text-sm px-4 py-3 rounded-xl bg-paper text-ink flex items-center justify-center gap-2 border border-mist">
                         <i data-lucide="loader" class="w-4 h-4 animate-spin"></i> Calculating...
                     </div>
                 </div>
@@ -284,28 +286,28 @@
         </div>
 
         <!-- Controls -->
-        <div class="glass-card rounded-2xl p-8 mt-8 border-t-2 border-t-blue-500/50 relative z-50">
+        <div class="glass-card rounded-2xl p-8 mt-8 relative z-50">
             <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
                 <div>
-                    <h3 class="text-lg font-semibold text-white flex items-center gap-2">
-                        <i data-lucide="sliders-horizontal" class="w-5 h-5 text-blue-400"></i> Interactive Timeline
+                    <h3 class="text-lg font-semibold text-ink flex items-center gap-2">
+                        <i data-lucide="sliders-horizontal" class="w-5 h-5 text-sydney"></i> Interactive Timeline
                         Explorer
                     </h3>
-                    <p class="text-sm text-slate-400 mt-1">Adjust Sydney time to see availability across all regions.
+                    <p class="text-sm text-muted mt-1">Adjust Sydney time to see availability across all regions.
                     </p>
                 </div>
 
-                <div class="flex items-center gap-3 bg-slate-900/50 p-2 rounded-xl border border-slate-700/50">
-                    <i data-lucide="calendar" class="w-4 h-4 text-slate-400 ml-2"></i>
+                <div class="flex items-center gap-3 bg-paper p-2 rounded-xl border border-mist">
+                    <i data-lucide="calendar" class="w-4 h-4 text-muted ml-2"></i>
                     <select id="day-selector"
-                        class="bg-transparent border-none text-white text-sm font-medium focus:ring-0 cursor-pointer outline-none pr-4">
-                        <option value="0" class="bg-slate-800">Monday</option>
-                        <option value="1" class="bg-slate-800">Tuesday</option>
-                        <option value="2" class="bg-slate-800">Wednesday</option>
-                        <option value="3" class="bg-slate-800">Thursday</option>
-                        <option value="4" class="bg-slate-800" selected>Friday</option>
-                        <option value="5" class="bg-slate-800">Saturday</option>
-                        <option value="6" class="bg-slate-800">Sunday</option>
+                        class="bg-transparent border-none text-ink text-sm font-medium focus:ring-0 cursor-pointer outline-none pr-4">
+                        <option value="0" class="bg-paper">Monday</option>
+                        <option value="1" class="bg-paper">Tuesday</option>
+                        <option value="2" class="bg-paper">Wednesday</option>
+                        <option value="3" class="bg-paper">Thursday</option>
+                        <option value="4" class="bg-paper" selected>Friday</option>
+                        <option value="5" class="bg-paper">Saturday</option>
+                        <option value="6" class="bg-paper">Sunday</option>
                     </select>
                 </div>
             </div>
@@ -315,21 +317,21 @@
                     class="w-full relative z-50 cursor-pointer">
 
                 <!-- Visual Timeline Markers -->
-                <div class="flex justify-between text-xs text-slate-500 mt-4 font-medium px-1 relative">
+                <div class="flex justify-between text-xs text-muted mt-4 font-mono px-1 relative">
                     <div class="flex flex-col items-center">
-                        <div class="h-2 w-px bg-slate-700 mb-1"></div>12 AM
+                        <div class="h-2 w-px bg-mist mb-1"></div>12 AM
                     </div>
                     <div class="flex flex-col items-center">
-                        <div class="h-2 w-px bg-slate-700 mb-1"></div>6 AM
+                        <div class="h-2 w-px bg-mist mb-1"></div>6 AM
                     </div>
                     <div class="flex flex-col items-center">
-                        <div class="h-2 w-px bg-blue-500 mb-1"></div>12 PM
+                        <div class="h-2 w-px bg-sydney mb-1"></div>12 PM
                     </div>
                     <div class="flex flex-col items-center">
-                        <div class="h-2 w-px bg-slate-700 mb-1"></div>6 PM
+                        <div class="h-2 w-px bg-mist mb-1"></div>6 PM
                     </div>
                     <div class="flex flex-col items-center">
-                        <div class="h-2 w-px bg-slate-700 mb-1"></div>11:59 PM
+                        <div class="h-2 w-px bg-mist mb-1"></div>11:59 PM
                     </div>
                 </div>
             </div>
@@ -501,17 +503,17 @@
 
         function setStatus(el, text, state, iconName) {
             // Rebuild inner HTML using direct SVGs for maximum slider performance
-            el.innerHTML = `${getIconSvg(iconName)} <span>${text}</span>`;
+            el.innerHTML = `${getIconSvg(iconName)} <span class="font-mono font-medium">${text}</span>`;
 
             // Reset base classes
-            el.className = "status-badge mt-4 w-full text-sm px-4 py-3 rounded-xl flex items-center justify-center gap-2 font-medium border";
+            el.className = "status-badge mt-4 w-full text-xs px-4 py-3 rounded-xl flex items-center justify-center gap-2 border";
 
             if (state === 'good') {
-                el.classList.add('bg-emerald-500/10', 'text-emerald-400', 'border-emerald-500/20');
+                el.classList.add('bg-[#E6EEEA]', 'text-[#123B31]', 'border-[#DDE3DD]');
             } else if (state === 'warn') {
-                el.classList.add('bg-amber-500/10', 'text-amber-400', 'border-amber-500/20');
+                el.classList.add('bg-[#FBEFD9]', 'text-[#B9832B]', 'border-[#DDE3DD]');
             } else {
-                el.classList.add('bg-rose-500/10', 'text-rose-400', 'border-rose-500/20');
+                el.classList.add('bg-[#F5E4E0]', 'text-[#B24435]', 'border-[#DDE3DD]');
             }
         }
 
