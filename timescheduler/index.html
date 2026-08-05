@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Global Team Scheduler</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lucide/0.263.1/umd/lucide.min.js"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        sydney: '#3b82f6', // blue-500
+                        la: '#f59e0b',     // amber-500
+                        nepal: '#10b981',  // emerald-500
+                        darkBg: '#0b1120',
+                        cardBg: '#1e293b'
+                    },
+                    boxShadow: {
+                        'glow-syd': '0 0 20px rgba(59, 130, 246, 0.15)',
+                        'glow-la': '0 0 20px rgba(245, 158, 11, 0.15)',
+                        'glow-nepal': '0 0 20px rgba(16, 185, 129, 0.15)',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #0b1120;
+            background-image: 
+                radial-gradient(at 0% 0%, rgba(59, 130, 246, 0.1) 0px, transparent 50%),
+                radial-gradient(at 100% 0%, rgba(16, 185, 129, 0.1) 0px, transparent 50%);
+            background-attachment: fixed;
+            color: #e2e8f0;
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+        
+        /* Custom Slider Styling */
+        input[type=range] {
+            -webkit-appearance: none;
+            width: 100%;
+            background: transparent;
+            height: 40px;
+            position: relative;
+            z-index: 50;
+        }
+        input[type=range]:focus {
+            outline: none;
+        }
+        input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            height: 28px;
+            width: 28px;
+            border-radius: 50%;
+            background: #ffffff;
+            cursor: pointer;
+            margin-top: -10px;
+            box-shadow: 0 0 15px rgba(255,255,255,0.4);
+            border: 3px solid #3b82f6;
+            transition: transform 0.1s;
+        }
+        input[type=range]::-webkit-slider-thumb:hover {
+            transform: scale(1.1);
+        }
+        input[type=range]::-webkit-slider-runnable-track {
+            width: 100%;
+            height: 8px;
+            cursor: pointer;
+            background: linear-gradient(90deg, #1e293b 0%, #334155 50%, #1e293b 100%);
+            border-radius: 4px;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+        
+        .glass-card {
+            background: rgba(30, 41, 59, 0.4);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        
+        .glass-card:hover {
+            background: rgba(30, 41, 59, 0.6);
+        }
+
+        .status-badge {
+            transition: all 0.3s ease;
+        }
+        
+        .time-transition {
+            font-variant-numeric: tabular-nums;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col items-center justify-center p-4 sm:p-8">
+
+    <div class="max-w-5xl w-full mx-auto space-y-8">
+        
+        <!-- Header -->
+        <div class="text-center space-y-3 mb-10">
+            <h1 class="text-4xl md:text-5xl font-bold text-white tracking-tight">Global <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-emerald-400">Sync</span> Scheduler</h1>
+            <p class="text-slate-400 text-lg max-w-2xl mx-auto">Finding the perfect overlap for Sydney, Los Angeles, and Nepal.</p>
+        </div>
+
+        <!-- Presets -->
+        <div class="flex flex-wrap gap-4 justify-center mb-8 relative z-50">
+            <button id="preset-1" class="glass-card hover:-translate-y-1 hover:shadow-glow-syd transition px-6 py-4 rounded-xl flex items-center gap-4 border-l-4 border-l-blue-500 group">
+                <div class="p-2 rounded-lg bg-blue-500/20 text-blue-400 group-hover:bg-blue-500 group-hover:text-white transition">
+                    <i data-lucide="calendar-check" class="w-5 h-5"></i>
+                </div>
+                <div class="text-left">
+                    <div class="font-semibold text-white">Option 1: Friday Overlap</div>
+                    <div class="text-xs text-slate-400 mt-1">Sydney: 2:00 PM (Fri)</div>
+                </div>
+            </button>
+            <button id="preset-2" class="glass-card hover:-translate-y-1 hover:shadow-glow-syd transition px-6 py-4 rounded-xl flex items-center gap-4 border-l-4 border-l-blue-500 group">
+                <div class="p-2 rounded-lg bg-blue-500/20 text-blue-400 group-hover:bg-blue-500 group-hover:text-white transition">
+                    <i data-lucide="calendar-check" class="w-5 h-5"></i>
+                </div>
+                <div class="text-left">
+                    <div class="font-semibold text-white">Option 2: Saturday Overlap</div>
+                    <div class="text-xs text-slate-400 mt-1">Sydney: 2:00 PM (Sat)</div>
+                </div>
+            </button>
+             <button id="preset-3" class="glass-card hover:-translate-y-1 hover:shadow-glow-syd transition px-6 py-4 rounded-xl flex items-center gap-4 border-l-4 border-l-blue-500 group">
+                <div class="p-2 rounded-lg bg-blue-500/20 text-blue-400 group-hover:bg-blue-500 group-hover:text-white transition">
+                    <i data-lucide="calendar-check" class="w-5 h-5"></i>
+                </div>
+                <div class="text-left">
+                    <div class="font-semibold text-white">Option 3: Monday Evening</div>
+                    <div class="text-xs text-slate-400 mt-1">Sydney: 6:00 PM (Mon)</div>
+                </div>
+            </button>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            
+            <!-- Sydney Card -->
+            <div class="glass-card rounded-2xl p-6 relative overflow-hidden group hover:shadow-glow-syd">
+                <div class="absolute -right-6 -top-6 opacity-[0.03] group-hover:opacity-[0.08] transition duration-500 pointer-events-none">
+                    <i data-lucide="compass" class="w-48 h-48 text-sydney"></i>
+                </div>
+                <div class="flex justify-between items-start mb-6 relative z-10">
+                    <div>
+                        <div class="flex items-center gap-2 mb-1">
+                            <span class="text-2xl">🇦🇺</span>
+                            <h2 class="text-xl font-bold text-white tracking-tight">Sydney</h2>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <span class="text-xs font-medium bg-sydney/20 text-sydney px-2 py-0.5 rounded">AEST</span>
+                            <p class="text-sm text-slate-400">You & Bishnu</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="relative z-10 flex flex-col items-center text-center">
+                    <div id="syd-time" class="text-5xl font-bold text-white time-transition tracking-tighter mb-2">14:00</div>
+                    <div id="syd-day" class="text-slate-300 font-medium text-lg">Friday</div>
+                    <div class="mt-6 w-full h-[1px] bg-gradient-to-r from-transparent via-slate-700 to-transparent"></div>
+                    <div id="syd-status" class="status-badge mt-4 w-full text-sm px-4 py-3 rounded-xl bg-slate-800 text-slate-300 flex items-center justify-center gap-2">
+                        <i data-lucide="loader" class="w-4 h-4 animate-spin"></i> Calculating...
+                    </div>
+                </div>
+            </div>
+
+            <!-- LA Card -->
+            <div class="glass-card rounded-2xl p-6 relative overflow-hidden group hover:shadow-glow-la">
+                <div class="absolute -right-6 -top-6 opacity-[0.03] group-hover:opacity-[0.08] transition duration-500 pointer-events-none">
+                    <i data-lucide="palm-tree" class="w-48 h-48 text-la"></i>
+                </div>
+                <div class="flex justify-between items-start mb-6 relative z-10">
+                    <div>
+                        <div class="flex items-center gap-2 mb-1">
+                            <span class="text-2xl">🇺🇸</span>
+                            <h2 class="text-xl font-bold text-white tracking-tight">Los Angeles</h2>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <span class="text-xs font-medium bg-la/20 text-la px-2 py-0.5 rounded">PDT</span>
+                            <p class="text-sm text-slate-400">Friend</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="relative z-10 flex flex-col items-center text-center">
+                    <div id="la-time" class="text-5xl font-bold text-white time-transition tracking-tighter mb-2">21:00</div>
+                    <div id="la-day" class="text-slate-300 font-medium text-lg">Thursday</div>
+                    <div class="mt-6 w-full h-[1px] bg-gradient-to-r from-transparent via-slate-700 to-transparent"></div>
+                    <div id="la-status" class="status-badge mt-4 w-full text-sm px-4 py-3 rounded-xl bg-slate-800 text-slate-300 flex items-center justify-center gap-2">
+                         <i data-lucide="loader" class="w-4 h-4 animate-spin"></i> Calculating...
+                    </div>
+                </div>
+            </div>
+
+            <!-- Nepal Card -->
+            <div class="glass-card rounded-2xl p-6 relative overflow-hidden group hover:shadow-glow-nepal">
+                <div class="absolute -right-6 -top-6 opacity-[0.03] group-hover:opacity-[0.08] transition duration-500 pointer-events-none">
+                    <i data-lucide="mountain-snow" class="w-48 h-48 text-nepal"></i>
+                </div>
+                <div class="flex justify-between items-start mb-6 relative z-10">
+                    <div>
+                        <div class="flex items-center gap-2 mb-1">
+                            <span class="text-2xl">🇳🇵</span>
+                            <h2 class="text-xl font-bold text-white tracking-tight">Nepal</h2>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <span class="text-xs font-medium bg-nepal/20 text-nepal px-2 py-0.5 rounded">NPT</span>
+                            <p class="text-sm text-slate-400">Roshna (Intern)</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="relative z-10 flex flex-col items-center text-center">
+                    <div id="nepal-time" class="text-5xl font-bold text-white time-transition tracking-tighter mb-2">09:45</div>
+                    <div id="nepal-day" class="text-slate-300 font-medium text-lg">Friday</div>
+                    <div class="mt-6 w-full h-[1px] bg-gradient-to-r from-transparent via-slate-700 to-transparent"></div>
+                    <div id="nepal-status" class="status-badge mt-4 w-full text-sm px-4 py-3 rounded-xl bg-slate-800 text-slate-300 flex items-center justify-center gap-2">
+                         <i data-lucide="loader" class="w-4 h-4 animate-spin"></i> Calculating...
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Controls -->
+        <div class="glass-card rounded-2xl p-8 mt-8 border-t-2 border-t-blue-500/50 relative z-50">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
+                <div>
+                    <h3 class="text-lg font-semibold text-white flex items-center gap-2">
+                        <i data-lucide="sliders-horizontal" class="w-5 h-5 text-blue-400"></i> Interactive Timeline Explorer
+                    </h3>
+                    <p class="text-sm text-slate-400 mt-1">Adjust Sydney time to see availability across all regions.</p>
+                </div>
+                
+                <div class="flex items-center gap-3 bg-slate-900/50 p-2 rounded-xl border border-slate-700/50">
+                    <i data-lucide="calendar" class="w-4 h-4 text-slate-400 ml-2"></i>
+                    <select id="day-selector" class="bg-transparent border-none text-white text-sm font-medium focus:ring-0 cursor-pointer outline-none pr-4">
+                        <option value="0" class="bg-slate-800">Monday</option>
+                        <option value="1" class="bg-slate-800">Tuesday</option>
+                        <option value="2" class="bg-slate-800">Wednesday</option>
+                        <option value="3" class="bg-slate-800">Thursday</option>
+                        <option value="4" class="bg-slate-800" selected>Friday</option>
+                        <option value="5" class="bg-slate-800">Saturday</option>
+                        <option value="6" class="bg-slate-800">Sunday</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="relative w-full pb-2 px-2">
+                <input type="range" id="time-slider" min="0" max="1439" value="840" class="w-full relative z-50 cursor-pointer">
+                
+                <!-- Visual Timeline Markers -->
+                <div class="flex justify-between text-xs text-slate-500 mt-4 font-medium px-1 relative">
+                    <div class="flex flex-col items-center"><div class="h-2 w-px bg-slate-700 mb-1"></div>12 AM</div>
+                    <div class="flex flex-col items-center"><div class="h-2 w-px bg-slate-700 mb-1"></div>6 AM</div>
+                    <div class="flex flex-col items-center"><div class="h-2 w-px bg-blue-500 mb-1"></div>12 PM</div>
+                    <div class="flex flex-col items-center"><div class="h-2 w-px bg-slate-700 mb-1"></div>6 PM</div>
+                    <div class="flex flex-col items-center"><div class="h-2 w-px bg-slate-700 mb-1"></div>11:59 PM</div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+
+    <script>
+        
+        // 1. Safe Initialization: Prevent JS from completely crashing if the icon CDN is blocked by the browser.
+        try {
+            if (typeof window.lucide !== 'undefined') {
+                window.lucide.createIcons();
+            }
+        } catch (e) {
+            console.warn("External icons blocked by security policy, but core app will continue to run.");
+        }
+
+        // 2. State elements
+        const slider = document.getElementById('time-slider');
+        const daySelector = document.getElementById('day-selector');
+        
+        const sydTimeEl = document.getElementById('syd-time');
+        const sydDayEl = document.getElementById('syd-day');
+        const sydStatusEl = document.getElementById('syd-status');
+
+        const laTimeEl = document.getElementById('la-time');
+        const laDayEl = document.getElementById('la-day');
+        const laStatusEl = document.getElementById('la-status');
+
+        const nepalTimeEl = document.getElementById('nepal-time');
+        const nepalDayEl = document.getElementById('nepal-day');
+        const nepalStatusEl = document.getElementById('nepal-status');
+
+        const preset1 = document.getElementById('preset-1');
+        const preset2 = document.getElementById('preset-2');
+        const preset3 = document.getElementById('preset-3');
+
+        const days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+
+        // Pre-defined SVG strings for dynamic badges to avoid heavy DOM parsing during slider drag
+        function getIconSvg(iconName) {
+            const baseProps = 'xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4"';
+            switch(iconName) {
+                case 'check-circle': return `<svg ${baseProps}><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>`;
+                case 'x-circle': return `<svg ${baseProps}><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg>`;
+                case 'moon': return `<svg ${baseProps}><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>`;
+                case 'briefcase': return `<svg ${baseProps}><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>`;
+                case 'alert-circle': return `<svg ${baseProps}><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>`;
+                default: return '';
+            }
+        }
+
+        // Format minutes into HH:MM AM/PM
+        function formatTime(totalMinutes) {
+            let h = Math.floor(totalMinutes / 60);
+            let m = totalMinutes % 60;
+            let ampm = h >= 12 ? 'PM' : 'AM';
+            
+            let h12 = h % 12;
+            h12 = h12 ? h12 : 12; // 0 becomes 12
+            
+            m = m < 10 ? '0' + m : m;
+            return `${h12}:${m} ${ampm}`;
+        }
+
+        // Calculate and Update everything
+        function updateTimes() {
+            const sydMins = parseInt(slider.value);
+            const sydDayIdx = parseInt(daySelector.value);
+
+            // Time math
+            // LA is 17 hours behind Sydney (AEST to PDT)
+            let laMins = sydMins - (17 * 60);
+            let laDayIdx = sydDayIdx;
+            if (laMins < 0) {
+                laMins += 24 * 60;
+                laDayIdx = (sydDayIdx - 1 + 7) % 7;
+            } else if (laMins >= 24 * 60) {
+                laMins -= 24 * 60;
+                laDayIdx = (sydDayIdx + 1) % 7;
+            }
+
+            // Nepal is 4h 15m behind Sydney
+            let nepalMins = sydMins - (4 * 60 + 15);
+            let nepalDayIdx = sydDayIdx;
+            if (nepalMins < 0) {
+                nepalMins += 24 * 60;
+                nepalDayIdx = (sydDayIdx - 1 + 7) % 7;
+            } else if (nepalMins >= 24 * 60) {
+                 nepalMins -= 24 * 60;
+                 nepalDayIdx = (sydDayIdx + 1) % 7;
+            }
+
+            // Update UI - Time and Day
+            sydTimeEl.innerText = formatTime(sydMins);
+            sydDayEl.innerText = days[sydDayIdx];
+
+            laTimeEl.innerText = formatTime(laMins);
+            laDayEl.innerText = days[laDayIdx];
+
+            nepalTimeEl.innerText = formatTime(nepalMins);
+            nepalDayEl.innerText = days[nepalDayIdx];
+
+            updateStatuses(sydMins, sydDayIdx, laMins, laDayIdx, nepalMins, nepalDayIdx);
+        }
+
+        function updateStatuses(sydMins, sydDayIdx, laMins, laDayIdx, nepalMins, nepalDayIdx) {
+            
+            // Sydney Logic (You & Bishnu)
+            const sydHour = sydMins / 60;
+            const isFridayOrSaturday = (sydDayIdx === 4 || sydDayIdx === 5); // Fri (4), Sat (5)
+            const isMonday = (sydDayIdx === 0);
+            
+            if (isFridayOrSaturday && sydHour >= 14 && sydHour < 23) {
+                setStatus(sydStatusEl, '✅ Available (Fri/Sat 2PM-11PM)', 'good', 'check-circle');
+            } else if (isMonday && sydHour >= 18) {
+                 setStatus(sydStatusEl, '✅ Available (Mon After 6PM)', 'good', 'check-circle');
+            } else {
+                let reason = "Unavailable";
+                if(isFridayOrSaturday) reason = "Busy before 2PM / after 11PM";
+                else if(isMonday) reason = "Busy before 6PM";
+                else reason = "Bishnu / You busy on this day";
+                setStatus(sydStatusEl, `🔴 ${reason}`, 'bad', 'x-circle');
+            }
+
+            // LA Logic (Friend free everyday after 4 PM)
+            const laHour = laMins / 60;
+            if (laHour >= 16) {
+                setStatus(laStatusEl, '✅ Free Time (After 4PM)', 'good', 'check-circle');
+            } else if (laHour < 8) {
+                setStatus(laStatusEl, '💤 Sleeping', 'bad', 'moon');
+            } else {
+                setStatus(laStatusEl, '🔴 Busy (Before 4PM)', 'bad', 'x-circle');
+            }
+
+            // Nepal Logic (Roshna intern working hours assume ~9AM - 6PM)
+            const nepalHour = nepalMins / 60;
+            if (nepalHour >= 9 && nepalHour <= 18) {
+                setStatus(nepalStatusEl, '✅ Normal Work Hours', 'good', 'briefcase');
+            } else if (nepalHour > 18 && nepalHour <= 21) {
+                setStatus(nepalStatusEl, '⚠️ Evening (Need to ask)', 'warn', 'alert-circle');
+            } else if (nepalHour > 7 && nepalHour < 9) {
+                 setStatus(nepalStatusEl, '⚠️ Early Morning (Need to ask)', 'warn', 'alert-circle');
+            } else {
+                setStatus(nepalStatusEl, '💤 Outside Work Hours', 'bad', 'moon');
+            }
+        }
+
+        function setStatus(el, text, state, iconName) {
+            // Rebuild inner HTML using direct SVGs for maximum slider performance
+            el.innerHTML = `${getIconSvg(iconName)} <span>${text}</span>`;
+            
+            // Reset base classes
+            el.className = "status-badge mt-4 w-full text-sm px-4 py-3 rounded-xl flex items-center justify-center gap-2 font-medium border";
+            
+            if (state === 'good') {
+                el.classList.add('bg-emerald-500/10', 'text-emerald-400', 'border-emerald-500/20');
+            } else if (state === 'warn') {
+                el.classList.add('bg-amber-500/10', 'text-amber-400', 'border-amber-500/20');
+            } else {
+                el.classList.add('bg-rose-500/10', 'text-rose-400', 'border-rose-500/20');
+            }
+        }
+
+        function setGoldenTime(option) {
+            if (option === 1) {
+                // Friday 2:00 PM (14 * 60 = 840)
+                slider.value = 840;
+                daySelector.value = "4"; 
+            } else if (option === 2) {
+                // Saturday 2:00 PM
+                slider.value = 840;
+                daySelector.value = "5"; 
+            } else if (option === 3) {
+                 // Monday 6:00 PM (18 * 60 = 1080)
+                slider.value = 1080;
+                daySelector.value = "0";
+            }
+            
+            updateTimes();
+        }
+
+        slider.addEventListener('input', updateTimes);
+        slider.addEventListener('change', updateTimes);
+        daySelector.addEventListener('change', updateTimes);
+
+        preset1.addEventListener('click', () => setGoldenTime(1));
+        preset2.addEventListener('click', () => setGoldenTime(2));
+        preset3.addEventListener('click', () => setGoldenTime(3));
+
+        // Initialize on load with a slight delay to ensure the DOM is completely ready
+        setTimeout(updateTimes, 100);
+
+    </script>
+</body>
+</html>
