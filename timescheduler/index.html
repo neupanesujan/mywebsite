@@ -156,9 +156,9 @@
             </button>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
 
-            <!-- Sydney Card -->
+            <!-- Sydney Card (Sujan) -->
             <div class="glass-card rounded-2xl p-6 relative overflow-hidden group hover:shadow-glow-syd">
                 <div
                     class="absolute -right-6 -top-6 opacity-[0.03] group-hover:opacity-[0.08] transition duration-500 pointer-events-none">
@@ -172,17 +172,48 @@
                         </div>
                         <div class="flex items-center gap-2">
                             <span class="text-xs font-medium bg-sydney/20 text-sydney px-2 py-0.5 rounded">AEST</span>
-                            <p class="text-sm text-slate-400">You & Bishnu</p>
+                            <p class="text-sm text-slate-400">Sujan</p>
                         </div>
                     </div>
                 </div>
                 <div class="relative z-10 flex flex-col items-center text-center">
-                    <div id="syd-time" class="text-5xl font-bold text-white time-transition tracking-tighter mb-2">14:00
+                    <div id="syd-sujan-time" class="text-5xl font-bold text-white time-transition tracking-tighter mb-2">14:00
                     </div>
-                    <div id="syd-day" class="text-slate-300 font-medium text-lg">Friday</div>
+                    <div id="syd-sujan-day" class="text-slate-300 font-medium text-lg">Friday</div>
                     <div class="mt-6 w-full h-[1px] bg-gradient-to-r from-transparent via-slate-700 to-transparent">
                     </div>
-                    <div id="syd-status"
+                    <div id="syd-sujan-status"
+                        class="status-badge mt-4 w-full text-sm px-4 py-3 rounded-xl bg-slate-800 text-slate-300 flex items-center justify-center gap-2">
+                        <i data-lucide="loader" class="w-4 h-4 animate-spin"></i> Calculating...
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sydney Card (Bishnu) -->
+            <div class="glass-card rounded-2xl p-6 relative overflow-hidden group hover:shadow-glow-syd">
+                <div
+                    class="absolute -right-6 -top-6 opacity-[0.03] group-hover:opacity-[0.08] transition duration-500 pointer-events-none">
+                    <i data-lucide="compass" class="w-48 h-48 text-sydney"></i>
+                </div>
+                <div class="flex justify-between items-start mb-6 relative z-10">
+                    <div>
+                        <div class="flex items-center gap-2 mb-1">
+                            <span class="text-2xl">🇦🇺</span>
+                            <h2 class="text-xl font-bold text-white tracking-tight">Sydney</h2>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <span class="text-xs font-medium bg-sydney/20 text-sydney px-2 py-0.5 rounded">AEST</span>
+                            <p class="text-sm text-slate-400">Bishnu</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="relative z-10 flex flex-col items-center text-center">
+                    <div id="syd-bishnu-time" class="text-5xl font-bold text-white time-transition tracking-tighter mb-2">14:00
+                    </div>
+                    <div id="syd-bishnu-day" class="text-slate-300 font-medium text-lg">Friday</div>
+                    <div class="mt-6 w-full h-[1px] bg-gradient-to-r from-transparent via-slate-700 to-transparent">
+                    </div>
+                    <div id="syd-bishnu-status"
                         class="status-badge mt-4 w-full text-sm px-4 py-3 rounded-xl bg-slate-800 text-slate-300 flex items-center justify-center gap-2">
                         <i data-lucide="loader" class="w-4 h-4 animate-spin"></i> Calculating...
                     </div>
@@ -203,7 +234,7 @@
                         </div>
                         <div class="flex items-center gap-2">
                             <span class="text-xs font-medium bg-la/20 text-la px-2 py-0.5 rounded">PDT</span>
-                            <p class="text-sm text-slate-400">Friend</p>
+                            <p class="text-sm text-slate-400">Biplov</p>
                         </div>
                     </div>
                 </div>
@@ -321,9 +352,13 @@
         const slider = document.getElementById('time-slider');
         const daySelector = document.getElementById('day-selector');
 
-        const sydTimeEl = document.getElementById('syd-time');
-        const sydDayEl = document.getElementById('syd-day');
-        const sydStatusEl = document.getElementById('syd-status');
+        const sydSujanTimeEl = document.getElementById('syd-sujan-time');
+        const sydSujanDayEl = document.getElementById('syd-sujan-day');
+        const sydSujanStatusEl = document.getElementById('syd-sujan-status');
+
+        const sydBishnuTimeEl = document.getElementById('syd-bishnu-time');
+        const sydBishnuDayEl = document.getElementById('syd-bishnu-day');
+        const sydBishnuStatusEl = document.getElementById('syd-bishnu-status');
 
         const laTimeEl = document.getElementById('la-time');
         const laDayEl = document.getElementById('la-day');
@@ -394,8 +429,11 @@
             }
 
             // Update UI - Time and Day
-            sydTimeEl.innerText = formatTime(sydMins);
-            sydDayEl.innerText = days[sydDayIdx];
+            sydSujanTimeEl.innerText = formatTime(sydMins);
+            sydSujanDayEl.innerText = days[sydDayIdx];
+
+            sydBishnuTimeEl.innerText = formatTime(sydMins);
+            sydBishnuDayEl.innerText = days[sydDayIdx];
 
             laTimeEl.innerText = formatTime(laMins);
             laDayEl.innerText = days[laDayIdx];
@@ -408,21 +446,34 @@
 
         function updateStatuses(sydMins, sydDayIdx, laMins, laDayIdx, nepalMins, nepalDayIdx) {
 
-            // Sydney Logic (You & Bishnu)
+            // Sydney Logic (Sujan)
             const sydHour = sydMins / 60;
             const isFridayOrSaturday = (sydDayIdx === 4 || sydDayIdx === 5); // Fri (4), Sat (5)
             const isMonday = (sydDayIdx === 0);
 
             if (isFridayOrSaturday && sydHour >= 14 && sydHour < 23) {
-                setStatus(sydStatusEl, '✅ Available (Fri/Sat 2PM-11PM)', 'good', 'check-circle');
+                setStatus(sydSujanStatusEl, '✅ Available (Fri/Sat 2PM-11PM)', 'good', 'check-circle');
             } else if (isMonday && sydHour >= 18) {
-                setStatus(sydStatusEl, '✅ Available (Mon After 6PM)', 'good', 'check-circle');
+                setStatus(sydSujanStatusEl, '✅ Available (Mon After 6PM)', 'good', 'check-circle');
             } else {
                 let reason = "Unavailable";
                 if (isFridayOrSaturday) reason = "Busy before 2PM / after 11PM";
                 else if (isMonday) reason = "Busy before 6PM";
-                else reason = "Bishnu / You busy on this day";
-                setStatus(sydStatusEl, `🔴 ${reason}`, 'bad', 'x-circle');
+                else reason = "Sujan busy on this day";
+                setStatus(sydSujanStatusEl, `🔴 ${reason}`, 'bad', 'x-circle');
+            }
+
+            // Sydney Logic (Bishnu)
+            if (isFridayOrSaturday && sydHour >= 14 && sydHour < 23) {
+                setStatus(sydBishnuStatusEl, '✅ Available (Fri/Sat 2PM-11PM)', 'good', 'check-circle');
+            } else if (isMonday && sydHour >= 18) {
+                setStatus(sydBishnuStatusEl, '✅ Available (Mon After 6PM)', 'good', 'check-circle');
+            } else {
+                let reason = "Unavailable";
+                if (isFridayOrSaturday) reason = "Busy before 2PM / after 11PM";
+                else if (isMonday) reason = "Busy before 6PM";
+                else reason = "Bishnu busy on this day";
+                setStatus(sydBishnuStatusEl, `🔴 ${reason}`, 'bad', 'x-circle');
             }
 
             // LA Logic (Friend free everyday after 4 PM)
