@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Global Team Scheduler</title>
+    <title>Projech H - Time Scheduler</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lucide/0.263.1/umd/lucide.min.js"></script>
-    
+
     <script>
         tailwind.config = {
             theme: {
@@ -34,7 +35,7 @@
     <style>
         body {
             background-color: #0b1120;
-            background-image: 
+            background-image:
                 radial-gradient(at 0% 0%, rgba(59, 130, 246, 0.1) 0px, transparent 50%),
                 radial-gradient(at 100% 0%, rgba(16, 185, 129, 0.1) 0px, transparent 50%);
             background-attachment: fixed;
@@ -42,7 +43,7 @@
             font-family: 'Inter', sans-serif;
             -webkit-font-smoothing: antialiased;
         }
-        
+
         /* Custom Slider Styling */
         input[type=range] {
             -webkit-appearance: none;
@@ -52,9 +53,11 @@
             position: relative;
             z-index: 50;
         }
+
         input[type=range]:focus {
             outline: none;
         }
+
         input[type=range]::-webkit-slider-thumb {
             -webkit-appearance: none;
             height: 28px;
@@ -63,22 +66,24 @@
             background: #ffffff;
             cursor: pointer;
             margin-top: -10px;
-            box-shadow: 0 0 15px rgba(255,255,255,0.4);
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
             border: 3px solid #3b82f6;
             transition: transform 0.1s;
         }
+
         input[type=range]::-webkit-slider-thumb:hover {
             transform: scale(1.1);
         }
+
         input[type=range]::-webkit-slider-runnable-track {
             width: 100%;
             height: 8px;
             cursor: pointer;
             background: linear-gradient(90deg, #1e293b 0%, #334155 50%, #1e293b 100%);
             border-radius: 4px;
-            border: 1px solid rgba(255,255,255,0.05);
+            border: 1px solid rgba(255, 255, 255, 0.05);
         }
-        
+
         .glass-card {
             background: rgba(30, 41, 59, 0.4);
             backdrop-filter: blur(12px);
@@ -86,7 +91,7 @@
             border: 1px solid rgba(255, 255, 255, 0.05);
             transition: transform 0.2s, box-shadow 0.2s;
         }
-        
+
         .glass-card:hover {
             background: rgba(30, 41, 59, 0.6);
         }
@@ -94,26 +99,32 @@
         .status-badge {
             transition: all 0.3s ease;
         }
-        
+
         .time-transition {
             font-variant-numeric: tabular-nums;
         }
     </style>
 </head>
+
 <body class="min-h-screen flex flex-col items-center justify-center p-4 sm:p-8">
 
     <div class="max-w-5xl w-full mx-auto space-y-8">
-        
+
         <!-- Header -->
         <div class="text-center space-y-3 mb-10">
-            <h1 class="text-4xl md:text-5xl font-bold text-white tracking-tight">Global <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-emerald-400">Sync</span> Scheduler</h1>
-            <p class="text-slate-400 text-lg max-w-2xl mx-auto">Finding the perfect overlap for Sydney, Los Angeles, and Nepal.</p>
+            <h1 class="text-4xl md:text-5xl font-bold text-white tracking-tight">Global <span
+                    class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-emerald-400">Sync</span>
+                Scheduler</h1>
+            <p class="text-slate-400 text-lg max-w-2xl mx-auto">Finding the perfect overlap for Sydney, Los Angeles, and
+                Nepal.</p>
         </div>
 
         <!-- Presets -->
         <div class="flex flex-wrap gap-4 justify-center mb-8 relative z-50">
-            <button id="preset-1" class="glass-card hover:-translate-y-1 hover:shadow-glow-syd transition px-6 py-4 rounded-xl flex items-center gap-4 border-l-4 border-l-blue-500 group">
-                <div class="p-2 rounded-lg bg-blue-500/20 text-blue-400 group-hover:bg-blue-500 group-hover:text-white transition">
+            <button id="preset-1"
+                class="glass-card hover:-translate-y-1 hover:shadow-glow-syd transition px-6 py-4 rounded-xl flex items-center gap-4 border-l-4 border-l-blue-500 group">
+                <div
+                    class="p-2 rounded-lg bg-blue-500/20 text-blue-400 group-hover:bg-blue-500 group-hover:text-white transition">
                     <i data-lucide="calendar-check" class="w-5 h-5"></i>
                 </div>
                 <div class="text-left">
@@ -121,8 +132,10 @@
                     <div class="text-xs text-slate-400 mt-1">Sydney: 2:00 PM (Fri)</div>
                 </div>
             </button>
-            <button id="preset-2" class="glass-card hover:-translate-y-1 hover:shadow-glow-syd transition px-6 py-4 rounded-xl flex items-center gap-4 border-l-4 border-l-blue-500 group">
-                <div class="p-2 rounded-lg bg-blue-500/20 text-blue-400 group-hover:bg-blue-500 group-hover:text-white transition">
+            <button id="preset-2"
+                class="glass-card hover:-translate-y-1 hover:shadow-glow-syd transition px-6 py-4 rounded-xl flex items-center gap-4 border-l-4 border-l-blue-500 group">
+                <div
+                    class="p-2 rounded-lg bg-blue-500/20 text-blue-400 group-hover:bg-blue-500 group-hover:text-white transition">
                     <i data-lucide="calendar-check" class="w-5 h-5"></i>
                 </div>
                 <div class="text-left">
@@ -130,8 +143,10 @@
                     <div class="text-xs text-slate-400 mt-1">Sydney: 2:00 PM (Sat)</div>
                 </div>
             </button>
-             <button id="preset-3" class="glass-card hover:-translate-y-1 hover:shadow-glow-syd transition px-6 py-4 rounded-xl flex items-center gap-4 border-l-4 border-l-blue-500 group">
-                <div class="p-2 rounded-lg bg-blue-500/20 text-blue-400 group-hover:bg-blue-500 group-hover:text-white transition">
+            <button id="preset-3"
+                class="glass-card hover:-translate-y-1 hover:shadow-glow-syd transition px-6 py-4 rounded-xl flex items-center gap-4 border-l-4 border-l-blue-500 group">
+                <div
+                    class="p-2 rounded-lg bg-blue-500/20 text-blue-400 group-hover:bg-blue-500 group-hover:text-white transition">
                     <i data-lucide="calendar-check" class="w-5 h-5"></i>
                 </div>
                 <div class="text-left">
@@ -142,10 +157,11 @@
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-            
+
             <!-- Sydney Card -->
             <div class="glass-card rounded-2xl p-6 relative overflow-hidden group hover:shadow-glow-syd">
-                <div class="absolute -right-6 -top-6 opacity-[0.03] group-hover:opacity-[0.08] transition duration-500 pointer-events-none">
+                <div
+                    class="absolute -right-6 -top-6 opacity-[0.03] group-hover:opacity-[0.08] transition duration-500 pointer-events-none">
                     <i data-lucide="compass" class="w-48 h-48 text-sydney"></i>
                 </div>
                 <div class="flex justify-between items-start mb-6 relative z-10">
@@ -161,10 +177,13 @@
                     </div>
                 </div>
                 <div class="relative z-10 flex flex-col items-center text-center">
-                    <div id="syd-time" class="text-5xl font-bold text-white time-transition tracking-tighter mb-2">14:00</div>
+                    <div id="syd-time" class="text-5xl font-bold text-white time-transition tracking-tighter mb-2">14:00
+                    </div>
                     <div id="syd-day" class="text-slate-300 font-medium text-lg">Friday</div>
-                    <div class="mt-6 w-full h-[1px] bg-gradient-to-r from-transparent via-slate-700 to-transparent"></div>
-                    <div id="syd-status" class="status-badge mt-4 w-full text-sm px-4 py-3 rounded-xl bg-slate-800 text-slate-300 flex items-center justify-center gap-2">
+                    <div class="mt-6 w-full h-[1px] bg-gradient-to-r from-transparent via-slate-700 to-transparent">
+                    </div>
+                    <div id="syd-status"
+                        class="status-badge mt-4 w-full text-sm px-4 py-3 rounded-xl bg-slate-800 text-slate-300 flex items-center justify-center gap-2">
                         <i data-lucide="loader" class="w-4 h-4 animate-spin"></i> Calculating...
                     </div>
                 </div>
@@ -172,7 +191,8 @@
 
             <!-- LA Card -->
             <div class="glass-card rounded-2xl p-6 relative overflow-hidden group hover:shadow-glow-la">
-                <div class="absolute -right-6 -top-6 opacity-[0.03] group-hover:opacity-[0.08] transition duration-500 pointer-events-none">
+                <div
+                    class="absolute -right-6 -top-6 opacity-[0.03] group-hover:opacity-[0.08] transition duration-500 pointer-events-none">
                     <i data-lucide="palm-tree" class="w-48 h-48 text-la"></i>
                 </div>
                 <div class="flex justify-between items-start mb-6 relative z-10">
@@ -188,18 +208,22 @@
                     </div>
                 </div>
                 <div class="relative z-10 flex flex-col items-center text-center">
-                    <div id="la-time" class="text-5xl font-bold text-white time-transition tracking-tighter mb-2">21:00</div>
+                    <div id="la-time" class="text-5xl font-bold text-white time-transition tracking-tighter mb-2">21:00
+                    </div>
                     <div id="la-day" class="text-slate-300 font-medium text-lg">Thursday</div>
-                    <div class="mt-6 w-full h-[1px] bg-gradient-to-r from-transparent via-slate-700 to-transparent"></div>
-                    <div id="la-status" class="status-badge mt-4 w-full text-sm px-4 py-3 rounded-xl bg-slate-800 text-slate-300 flex items-center justify-center gap-2">
-                         <i data-lucide="loader" class="w-4 h-4 animate-spin"></i> Calculating...
+                    <div class="mt-6 w-full h-[1px] bg-gradient-to-r from-transparent via-slate-700 to-transparent">
+                    </div>
+                    <div id="la-status"
+                        class="status-badge mt-4 w-full text-sm px-4 py-3 rounded-xl bg-slate-800 text-slate-300 flex items-center justify-center gap-2">
+                        <i data-lucide="loader" class="w-4 h-4 animate-spin"></i> Calculating...
                     </div>
                 </div>
             </div>
 
             <!-- Nepal Card -->
             <div class="glass-card rounded-2xl p-6 relative overflow-hidden group hover:shadow-glow-nepal">
-                <div class="absolute -right-6 -top-6 opacity-[0.03] group-hover:opacity-[0.08] transition duration-500 pointer-events-none">
+                <div
+                    class="absolute -right-6 -top-6 opacity-[0.03] group-hover:opacity-[0.08] transition duration-500 pointer-events-none">
                     <i data-lucide="mountain-snow" class="w-48 h-48 text-nepal"></i>
                 </div>
                 <div class="flex justify-between items-start mb-6 relative z-10">
@@ -210,16 +234,19 @@
                         </div>
                         <div class="flex items-center gap-2">
                             <span class="text-xs font-medium bg-nepal/20 text-nepal px-2 py-0.5 rounded">NPT</span>
-                            <p class="text-sm text-slate-400">Roshna (Intern)</p>
+                            <p class="text-sm text-slate-400">Roshna</p>
                         </div>
                     </div>
                 </div>
                 <div class="relative z-10 flex flex-col items-center text-center">
-                    <div id="nepal-time" class="text-5xl font-bold text-white time-transition tracking-tighter mb-2">09:45</div>
+                    <div id="nepal-time" class="text-5xl font-bold text-white time-transition tracking-tighter mb-2">
+                        09:45</div>
                     <div id="nepal-day" class="text-slate-300 font-medium text-lg">Friday</div>
-                    <div class="mt-6 w-full h-[1px] bg-gradient-to-r from-transparent via-slate-700 to-transparent"></div>
-                    <div id="nepal-status" class="status-badge mt-4 w-full text-sm px-4 py-3 rounded-xl bg-slate-800 text-slate-300 flex items-center justify-center gap-2">
-                         <i data-lucide="loader" class="w-4 h-4 animate-spin"></i> Calculating...
+                    <div class="mt-6 w-full h-[1px] bg-gradient-to-r from-transparent via-slate-700 to-transparent">
+                    </div>
+                    <div id="nepal-status"
+                        class="status-badge mt-4 w-full text-sm px-4 py-3 rounded-xl bg-slate-800 text-slate-300 flex items-center justify-center gap-2">
+                        <i data-lucide="loader" class="w-4 h-4 animate-spin"></i> Calculating...
                     </div>
                 </div>
             </div>
@@ -230,14 +257,17 @@
             <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
                 <div>
                     <h3 class="text-lg font-semibold text-white flex items-center gap-2">
-                        <i data-lucide="sliders-horizontal" class="w-5 h-5 text-blue-400"></i> Interactive Timeline Explorer
+                        <i data-lucide="sliders-horizontal" class="w-5 h-5 text-blue-400"></i> Interactive Timeline
+                        Explorer
                     </h3>
-                    <p class="text-sm text-slate-400 mt-1">Adjust Sydney time to see availability across all regions.</p>
+                    <p class="text-sm text-slate-400 mt-1">Adjust Sydney time to see availability across all regions.
+                    </p>
                 </div>
-                
+
                 <div class="flex items-center gap-3 bg-slate-900/50 p-2 rounded-xl border border-slate-700/50">
                     <i data-lucide="calendar" class="w-4 h-4 text-slate-400 ml-2"></i>
-                    <select id="day-selector" class="bg-transparent border-none text-white text-sm font-medium focus:ring-0 cursor-pointer outline-none pr-4">
+                    <select id="day-selector"
+                        class="bg-transparent border-none text-white text-sm font-medium focus:ring-0 cursor-pointer outline-none pr-4">
                         <option value="0" class="bg-slate-800">Monday</option>
                         <option value="1" class="bg-slate-800">Tuesday</option>
                         <option value="2" class="bg-slate-800">Wednesday</option>
@@ -248,25 +278,36 @@
                     </select>
                 </div>
             </div>
-            
+
             <div class="relative w-full pb-2 px-2">
-                <input type="range" id="time-slider" min="0" max="1439" value="840" class="w-full relative z-50 cursor-pointer">
-                
+                <input type="range" id="time-slider" min="0" max="1439" value="840"
+                    class="w-full relative z-50 cursor-pointer">
+
                 <!-- Visual Timeline Markers -->
                 <div class="flex justify-between text-xs text-slate-500 mt-4 font-medium px-1 relative">
-                    <div class="flex flex-col items-center"><div class="h-2 w-px bg-slate-700 mb-1"></div>12 AM</div>
-                    <div class="flex flex-col items-center"><div class="h-2 w-px bg-slate-700 mb-1"></div>6 AM</div>
-                    <div class="flex flex-col items-center"><div class="h-2 w-px bg-blue-500 mb-1"></div>12 PM</div>
-                    <div class="flex flex-col items-center"><div class="h-2 w-px bg-slate-700 mb-1"></div>6 PM</div>
-                    <div class="flex flex-col items-center"><div class="h-2 w-px bg-slate-700 mb-1"></div>11:59 PM</div>
+                    <div class="flex flex-col items-center">
+                        <div class="h-2 w-px bg-slate-700 mb-1"></div>12 AM
+                    </div>
+                    <div class="flex flex-col items-center">
+                        <div class="h-2 w-px bg-slate-700 mb-1"></div>6 AM
+                    </div>
+                    <div class="flex flex-col items-center">
+                        <div class="h-2 w-px bg-blue-500 mb-1"></div>12 PM
+                    </div>
+                    <div class="flex flex-col items-center">
+                        <div class="h-2 w-px bg-slate-700 mb-1"></div>6 PM
+                    </div>
+                    <div class="flex flex-col items-center">
+                        <div class="h-2 w-px bg-slate-700 mb-1"></div>11:59 PM
+                    </div>
                 </div>
             </div>
         </div>
-        
+
     </div>
 
     <script>
-        
+
         // 1. Safe Initialization: Prevent JS from completely crashing if the icon CDN is blocked by the browser.
         try {
             if (typeof window.lucide !== 'undefined') {
@@ -279,7 +320,7 @@
         // 2. State elements
         const slider = document.getElementById('time-slider');
         const daySelector = document.getElementById('day-selector');
-        
+
         const sydTimeEl = document.getElementById('syd-time');
         const sydDayEl = document.getElementById('syd-day');
         const sydStatusEl = document.getElementById('syd-status');
@@ -301,7 +342,7 @@
         // Pre-defined SVG strings for dynamic badges to avoid heavy DOM parsing during slider drag
         function getIconSvg(iconName) {
             const baseProps = 'xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4"';
-            switch(iconName) {
+            switch (iconName) {
                 case 'check-circle': return `<svg ${baseProps}><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>`;
                 case 'x-circle': return `<svg ${baseProps}><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg>`;
                 case 'moon': return `<svg ${baseProps}><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>`;
@@ -316,10 +357,10 @@
             let h = Math.floor(totalMinutes / 60);
             let m = totalMinutes % 60;
             let ampm = h >= 12 ? 'PM' : 'AM';
-            
+
             let h12 = h % 12;
             h12 = h12 ? h12 : 12; // 0 becomes 12
-            
+
             m = m < 10 ? '0' + m : m;
             return `${h12}:${m} ${ampm}`;
         }
@@ -348,8 +389,8 @@
                 nepalMins += 24 * 60;
                 nepalDayIdx = (sydDayIdx - 1 + 7) % 7;
             } else if (nepalMins >= 24 * 60) {
-                 nepalMins -= 24 * 60;
-                 nepalDayIdx = (sydDayIdx + 1) % 7;
+                nepalMins -= 24 * 60;
+                nepalDayIdx = (sydDayIdx + 1) % 7;
             }
 
             // Update UI - Time and Day
@@ -366,20 +407,20 @@
         }
 
         function updateStatuses(sydMins, sydDayIdx, laMins, laDayIdx, nepalMins, nepalDayIdx) {
-            
+
             // Sydney Logic (You & Bishnu)
             const sydHour = sydMins / 60;
             const isFridayOrSaturday = (sydDayIdx === 4 || sydDayIdx === 5); // Fri (4), Sat (5)
             const isMonday = (sydDayIdx === 0);
-            
+
             if (isFridayOrSaturday && sydHour >= 14 && sydHour < 23) {
                 setStatus(sydStatusEl, '✅ Available (Fri/Sat 2PM-11PM)', 'good', 'check-circle');
             } else if (isMonday && sydHour >= 18) {
-                 setStatus(sydStatusEl, '✅ Available (Mon After 6PM)', 'good', 'check-circle');
+                setStatus(sydStatusEl, '✅ Available (Mon After 6PM)', 'good', 'check-circle');
             } else {
                 let reason = "Unavailable";
-                if(isFridayOrSaturday) reason = "Busy before 2PM / after 11PM";
-                else if(isMonday) reason = "Busy before 6PM";
+                if (isFridayOrSaturday) reason = "Busy before 2PM / after 11PM";
+                else if (isMonday) reason = "Busy before 6PM";
                 else reason = "Bishnu / You busy on this day";
                 setStatus(sydStatusEl, `🔴 ${reason}`, 'bad', 'x-circle');
             }
@@ -401,7 +442,7 @@
             } else if (nepalHour > 18 && nepalHour <= 21) {
                 setStatus(nepalStatusEl, '⚠️ Evening (Need to ask)', 'warn', 'alert-circle');
             } else if (nepalHour > 7 && nepalHour < 9) {
-                 setStatus(nepalStatusEl, '⚠️ Early Morning (Need to ask)', 'warn', 'alert-circle');
+                setStatus(nepalStatusEl, '⚠️ Early Morning (Need to ask)', 'warn', 'alert-circle');
             } else {
                 setStatus(nepalStatusEl, '💤 Outside Work Hours', 'bad', 'moon');
             }
@@ -410,10 +451,10 @@
         function setStatus(el, text, state, iconName) {
             // Rebuild inner HTML using direct SVGs for maximum slider performance
             el.innerHTML = `${getIconSvg(iconName)} <span>${text}</span>`;
-            
+
             // Reset base classes
             el.className = "status-badge mt-4 w-full text-sm px-4 py-3 rounded-xl flex items-center justify-center gap-2 font-medium border";
-            
+
             if (state === 'good') {
                 el.classList.add('bg-emerald-500/10', 'text-emerald-400', 'border-emerald-500/20');
             } else if (state === 'warn') {
@@ -427,17 +468,17 @@
             if (option === 1) {
                 // Friday 2:00 PM (14 * 60 = 840)
                 slider.value = 840;
-                daySelector.value = "4"; 
+                daySelector.value = "4";
             } else if (option === 2) {
                 // Saturday 2:00 PM
                 slider.value = 840;
-                daySelector.value = "5"; 
+                daySelector.value = "5";
             } else if (option === 3) {
-                 // Monday 6:00 PM (18 * 60 = 1080)
+                // Monday 6:00 PM (18 * 60 = 1080)
                 slider.value = 1080;
                 daySelector.value = "0";
             }
-            
+
             updateTimes();
         }
 
@@ -454,4 +495,5 @@
 
     </script>
 </body>
+
 </html>
