@@ -452,11 +452,15 @@
             const sydHour = sydMins / 60;
             const isFridayOrSaturday = (sydDayIdx === 4 || sydDayIdx === 5); // Fri (4), Sat (5)
             const isMonday = (sydDayIdx === 0);
+            const isTuesday = (sydDayIdx === 1);
+            const isWednesday = (sydDayIdx === 2);
 
             if (isFridayOrSaturday && sydHour >= 14 && sydHour < 23) {
                 setStatus(sydSujanStatusEl, '✅ Available (Fri/Sat 2PM-11PM)', 'good', 'check-circle');
             } else if (isMonday && sydHour >= 18) {
                 setStatus(sydSujanStatusEl, '✅ Available (Mon After 6PM)', 'good', 'check-circle');
+            } else if (isTuesday || isWednesday) {
+                setStatus(sydSujanStatusEl, '✅ Available (All Day)', 'good', 'check-circle');
             } else {
                 let reason = "Unavailable";
                 if (isFridayOrSaturday) reason = "Busy before 2PM / after 11PM";
@@ -470,10 +474,13 @@
                 setStatus(sydBishnuStatusEl, '✅ Available (Fri/Sat 2PM-11PM)', 'good', 'check-circle');
             } else if (isMonday && sydHour >= 18) {
                 setStatus(sydBishnuStatusEl, '✅ Available (Mon After 6PM)', 'good', 'check-circle');
+            } else if (isWednesday && sydHour >= 14) {
+                setStatus(sydBishnuStatusEl, '✅ Available (Wed After 2PM)', 'good', 'check-circle');
             } else {
                 let reason = "Unavailable";
                 if (isFridayOrSaturday) reason = "Busy before 2PM / after 11PM";
                 else if (isMonday) reason = "Busy before 6PM";
+                else if (isWednesday) reason = "Busy before 2PM";
                 else reason = "Bishnu busy on this day";
                 setStatus(sydBishnuStatusEl, `🔴 ${reason}`, 'bad', 'x-circle');
             }
