@@ -117,7 +117,7 @@
             <h1 class="text-4xl md:text-5xl font-fraunces font-medium text-ink tracking-tight"> <span
                     class="text-sydney italic">Project H</span>
                 - Time Scheduler</h1>
-            <p class="text-muted text-lg max-w-2xl mx-auto">Finding the perfect overlap for Sydney, Los Angeles, and
+            <p class="text-muted text-lg max-w-2xl mx-auto">Finding the perfect overlap for Sydney, North Carolina, and
                 Nepal.</p>
         </div>
 
@@ -222,31 +222,31 @@
                 </div>
             </div>
 
-            <!-- LA Card -->
+            <!-- NC Card -->
             <div class="glass-card rounded-2xl p-6 relative overflow-hidden group hover:shadow-glow-la border border-mist">
                 <div
                     class="absolute -right-6 -top-6 opacity-[0.03] group-hover:opacity-[0.08] transition duration-500 pointer-events-none">
-                    <i data-lucide="palm-tree" class="w-48 h-48 text-la"></i>
+                    <i data-lucide="map-pin" class="w-48 h-48 text-la"></i>
                 </div>
                 <div class="flex justify-between items-start mb-6 relative z-10">
                     <div>
                         <div class="flex items-center gap-2 mb-1">
                             <span class="text-2xl">🇺🇸</span>
-                            <h2 class="text-xl font-fraunces font-medium text-ink tracking-tight">Los Angeles</h2>
+                            <h2 class="text-xl font-fraunces font-medium text-ink tracking-tight">North Carolina</h2>
                         </div>
                         <div class="flex items-center gap-2">
-                            <span class="text-xs font-mono font-medium bg-[#FBEFD9] text-la px-2 py-0.5 rounded-full">PDT</span>
+                            <span class="text-xs font-mono font-medium bg-[#FBEFD9] text-la px-2 py-0.5 rounded-full">ET</span>
                             <p class="text-sm text-muted">Biplov</p>
                         </div>
                     </div>
                 </div>
                 <div class="relative z-10 flex flex-col items-center text-center">
-                    <div id="la-time" class="text-5xl font-fraunces font-medium text-ink time-transition tracking-tighter mb-2">21:00
+                    <div id="nc-time" class="text-5xl font-fraunces font-medium text-ink time-transition tracking-tighter mb-2">21:00
                     </div>
-                    <div id="la-day" class="text-ink font-medium text-lg">Thursday</div>
+                    <div id="nc-day" class="text-ink font-medium text-lg">Thursday</div>
                     <div class="mt-6 w-full h-[1px] bg-mist">
                     </div>
-                    <div id="la-status"
+                    <div id="nc-status"
                         class="status-badge mt-4 w-full text-sm px-4 py-3 rounded-xl bg-paper text-ink flex items-center justify-center gap-2 border border-mist">
                         <i data-lucide="loader" class="w-4 h-4 animate-spin"></i> Calculating...
                     </div>
@@ -362,9 +362,9 @@
         const sydBishnuDayEl = document.getElementById('syd-bishnu-day');
         const sydBishnuStatusEl = document.getElementById('syd-bishnu-status');
 
-        const laTimeEl = document.getElementById('la-time');
-        const laDayEl = document.getElementById('la-day');
-        const laStatusEl = document.getElementById('la-status');
+        const ncTimeEl = document.getElementById('nc-time');
+        const ncDayEl = document.getElementById('nc-day');
+        const ncStatusEl = document.getElementById('nc-status');
 
         const nepalTimeEl = document.getElementById('nepal-time');
         const nepalDayEl = document.getElementById('nepal-day');
@@ -408,15 +408,15 @@
             const sydDayIdx = parseInt(daySelector.value);
 
             // Time math
-            // LA is 17 hours behind Sydney (AEST to PDT)
-            let laMins = sydMins - (17 * 60);
-            let laDayIdx = sydDayIdx;
-            if (laMins < 0) {
-                laMins += 24 * 60;
-                laDayIdx = (sydDayIdx - 1 + 7) % 7;
-            } else if (laMins >= 24 * 60) {
-                laMins -= 24 * 60;
-                laDayIdx = (sydDayIdx + 1) % 7;
+            // NC is 14 hours behind Sydney (AEST to ET)
+            let ncMins = sydMins - (14 * 60);
+            let ncDayIdx = sydDayIdx;
+            if (ncMins < 0) {
+                ncMins += 24 * 60;
+                ncDayIdx = (sydDayIdx - 1 + 7) % 7;
+            } else if (ncMins >= 24 * 60) {
+                ncMins -= 24 * 60;
+                ncDayIdx = (sydDayIdx + 1) % 7;
             }
 
             // Nepal is 4h 15m behind Sydney
@@ -437,16 +437,16 @@
             sydBishnuTimeEl.innerText = formatTime(sydMins);
             sydBishnuDayEl.innerText = days[sydDayIdx];
 
-            laTimeEl.innerText = formatTime(laMins);
-            laDayEl.innerText = days[laDayIdx];
+            ncTimeEl.innerText = formatTime(ncMins);
+            ncDayEl.innerText = days[ncDayIdx];
 
             nepalTimeEl.innerText = formatTime(nepalMins);
             nepalDayEl.innerText = days[nepalDayIdx];
 
-            updateStatuses(sydMins, sydDayIdx, laMins, laDayIdx, nepalMins, nepalDayIdx);
+            updateStatuses(sydMins, sydDayIdx, ncMins, ncDayIdx, nepalMins, nepalDayIdx);
         }
 
-        function updateStatuses(sydMins, sydDayIdx, laMins, laDayIdx, nepalMins, nepalDayIdx) {
+        function updateStatuses(sydMins, sydDayIdx, ncMins, ncDayIdx, nepalMins, nepalDayIdx) {
 
             // Sydney Logic (Sujan)
             const sydHour = sydMins / 60;
@@ -485,14 +485,14 @@
                 setStatus(sydBishnuStatusEl, `🔴 ${reason}`, 'bad', 'x-circle');
             }
 
-            // LA Logic (Friend free everyday after 4 PM)
-            const laHour = laMins / 60;
-            if (laHour >= 16) {
-                setStatus(laStatusEl, '✅ Free Time (After 4PM)', 'good', 'check-circle');
-            } else if (laHour < 8) {
-                setStatus(laStatusEl, '💤 Sleeping', 'bad', 'moon');
+            // NC Logic (Biplov free everyday after 4 PM)
+            const ncHour = ncMins / 60;
+            if (ncHour >= 16) {
+                setStatus(ncStatusEl, '✅ Free Time (After 4PM)', 'good', 'check-circle');
+            } else if (ncHour < 8) {
+                setStatus(ncStatusEl, '💤 Sleeping', 'bad', 'moon');
             } else {
-                setStatus(laStatusEl, '🔴 Busy (Before 4PM)', 'bad', 'x-circle');
+                setStatus(ncStatusEl, '🔴 Busy (Before 4PM)', 'bad', 'x-circle');
             }
 
             // Nepal Logic (Roshna intern working hours assume ~9AM - 6PM)
